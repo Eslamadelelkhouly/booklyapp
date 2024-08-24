@@ -6,13 +6,13 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 class HomeRepoImplementaion implements HomeRepo {
-  final ApiService apiService;
+  final ApiService? apiService;
 
-  HomeRepoImplementaion({required this.apiService});
+  HomeRepoImplementaion({  this.apiService});
   @override
   Future<Either<Failure, List<BookModel>>> fetchNewSetBooks() async {
     try {
-      var data = await apiService.get(
+      var data = await apiService!.get(
           endPoint: 'volumes?q=programming&filter=ebooks&orderBy=newest');
       List<BookModel> books = [];
       for (var item in data['items']) {
@@ -31,7 +31,7 @@ class HomeRepoImplementaion implements HomeRepo {
   @override
   Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
       try {
-      var data = await apiService.get(
+      var data = await apiService!.get(
           endPoint: 'volumes?q=programming&filter=ebooks');
       List<BookModel> books = [];
       for (var item in data['items']) {
