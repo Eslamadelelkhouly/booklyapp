@@ -8,26 +8,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(const Booklyapp());
   SetupSeriveLocater();
+  runApp(const Booklyapp());
 }
 
 class Booklyapp extends StatelessWidget {
   const Booklyapp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => FeaturedBooksCubit(
-            getIt.get<HomeRepoImplementaion>()..fetchFeaturedBooks(),
-          ),
-        ),
-        BlocProvider(
-          create: (context) =>
-              FeaturedBooksCubit(getIt.get<HomeRepoImplementaion>()),
+          create: (context) {
+            final cubit = FeaturedBooksCubit(getIt.get<HomeRepoImplementaion>());
+            cubit.fetchFeaturedBooks(); // Fetch books after Cubit creation
+            return cubit;
+          },
         ),
       ],
       child: MaterialApp.router(
