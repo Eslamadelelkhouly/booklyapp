@@ -10,6 +10,7 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: const ScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
           child: Column(
